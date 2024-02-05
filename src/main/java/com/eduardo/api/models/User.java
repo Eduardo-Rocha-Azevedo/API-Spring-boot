@@ -1,5 +1,7 @@
 package com.eduardo.api.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,6 +11,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -40,7 +43,9 @@ public class User {
     @Column(name = "password", length = 100, nullable = false)
     private String password;
 
-    //private List<Task> task = new ArrayList<Task>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Task> task = new ArrayList<Task>();
 
 
     public User() {
@@ -77,6 +82,23 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public List<Task> getTask() {
+        return this.task;
+    }
+
+    public void setTask(List<Task> task) {
+        this.task = task;
+    }
+
 
     @Override
     public boolean equals(Object obj){
